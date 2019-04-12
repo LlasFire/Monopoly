@@ -1,167 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<link rel="stylesheet" type="text/css" href="css.css">
-	<title>Монополия</title>
+	<title>Monopoly</title>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="css/ctyle.css">
+
 </head>
-
-
-
-<script type="text/javascript">
-	
-	function drowbox(top,left,w,h,id){
-
-		var inside ='';
-
-		if ((id%10)!=2 && (id%10)!=8 && (id%10)!=0) {
-			var cost = id*4*50;
-			var pay = id*50;
-
-			if ((id%10)==5) {
-				/* цена паравозика */
-				var cost = 400;
-				var pay = 200;
-			}
-
-			var inside = '<span id="cost'+id+'">'+cost+'</span><br><span id="pay'+id+'">'+pay+'</span>';
-
-		}else{
-			switch(id) {
-			  case 0:  
-			    inside = 'Старт';
-			    break;
-
-			  case 10:  
-			   	inside = 'Тюрьма';
-			    break;
-
-			  case 20:  
-			   	inside = 'Свободно';
-			    break;
-
-			  case 30:  
-			   	inside = 'Иди в тюрьму';
-			    break;
-//TODO переписать эту хрень нормально, добавив все нужные case
-			  default:
-			    if (id%10==8) {
-			    	inside = 'Бери карту!';
-			    }else{
-			    	var bonus = 500;
-			    	inside = 'Бонус <span id="bonus'+id+'">'+bonus+'</span>';
-			    }
-			    break;
-			} 
-		}
-		
-		
-
-		var string = '<div style="top: '+top+'px;	left: '+left+'px; width: '+w+'px; height: '+h+'px; background: #bbb; border:2px solid black; position: absolute;" id="'+id+'">'+inside+'</div>';
-
-
-		document.writeln(string);
-
-	}
-
-</script>
 <body>
 
-<!--<div class="box1">
-	<div id="color1"></div>
-	<span id="cost1">200</span>
-	<br>
-	<span id="pay1">50</span>
-</div>-->
-
-
-	<div class="field">
-		<script type="text/javascript">
-			drowbox(0,0,100,100,0); // блок старт
-
-			for (var i = 1; i <= 9; i++) {
-				var leftn = 102+(i-1)*50;
-				drowbox(0,leftn,50,100,i);
-			}
-
-			drowbox(0,550,100,100,10); // тюрьма
-
-			var topn = 102;
-			for (var i = 11; i <= 19; i++) {
-				drowbox(topn,550,100,50,i);
-				topn = topn+50;
-			}
-
-			drowbox(554,550,100,100,20); // free
-
-			var leftn = 498;
-			for (var i = 21; i <= 29; i++) {
-				drowbox(554,leftn,50,100,i);
-				leftn = leftn-50;
-			}
-
-			drowbox(554,0,100,100,30); // go to jail
-
-			var topn = 502;
-			for (var i = 31; i <= 39; i++) {
-				drowbox(topn,0,100,50,i);
-				topn = topn-50;
-			}
-
-		</script>
-	</div>	
-
-	<div class="usertable">
-		<input type="number" id="funds">
-		<input type="text" id="name">
-		<button id="button">Добавить игрока</button>
-
-			<script type="text/javascript">
-
-	    var returnst = "";
-
-		for (var i=0,key; i < localStorage.length; i++) {
-			key = localStorage.key(i);
-			var returnObj = JSON.parse(localStorage.getItem(key));
-
-			returnst+= '<hr>'
-			+returnObj.name+': $'
-			+returnObj.funds+' / '
-			+returnObj.place+' ';
-		}
-
-		document.writeln(returnst);
-
-	</script>
+	<div id="field">
+		
 	</div>
 
-<script type="text/javascript">
-	var element = document.getElementById('button');
-element.onclick = function(){ 
-	var funds = document.getElementById('funds').value;
-	var name = document.getElementById('name').value;
-	if (name=="" || funds=="") {
-		alert("что-то не ввели");
-	}else{
-	var myItem = {}
-		myItem.name = name;
-		myItem.funds = funds;
-		myItem.place = 0;
-var serialObj = JSON.stringify(myItem); //сериализуем его
-localStorage.setItem(name, serialObj); //запишем его в хранилище по ключу 
-document.location.href='index.html';
-	}
-};
+	<div class="usertable">
+		<input type="number" id="capital">
+		<input type="text" id="name">
+		<button id="button">Add new gamer</button>
+	</div>
 
-
-
-</script>
-
-
-
-
-
-
-
+<script src="js/usertable.js"></script>
+<script src="js/field.js"></script>
 </body>
 </html>
