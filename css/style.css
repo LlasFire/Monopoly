@@ -21,7 +21,7 @@
 	background: red;
 	border-bottom:2px solid black;
 }
-.usertable{
+#usertable{
 	position: relative;
 	margin-left: 30px;
 	width: 300px;
