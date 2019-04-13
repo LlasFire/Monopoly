@@ -67,7 +67,7 @@ function drawBox(objDiv){
 
 	let div = document.createElement('div');
 		div.style.backgroundColor = "#bbb";
-		div.style.border = "2px solid black";
+		div.style.border = "1px solid black";
 		div.style.position = "absolute";
 		div.style.top = objDiv.top + 'px';
 		div.style.left = objDiv.left + 'px';
@@ -98,9 +98,9 @@ for(let i = 0; i < 41; i++){
 			break;
 
 		case (i > 0 && i < 10)? i : 'alert' : //top line
-			newDiv.width = 50;
+			newDiv.width = 52;
 			newDiv.height = 100;
-			newDiv.left = 102 + (i - 1) * newDiv.width;
+			newDiv.left = 99 + (i - 1) * (newDiv.width - 1);
 			break;
 
 		case 10:	// jail
@@ -111,9 +111,9 @@ for(let i = 0; i < 41; i++){
 
 		case (i > 10 && i < 20)? i : 'alert':	// right line
 			newDiv.width = 100;
-			newDiv.height = 50;
+			newDiv.height = 52;
 			newDiv.left = 550;
-			newDiv.top = 102 + (i - 11) * newDiv.height;
+			newDiv.top = 99 + (i - 11) * (newDiv.height - 1);
 			break;
 		
 		case 20:	//free
@@ -123,10 +123,10 @@ for(let i = 0; i < 41; i++){
 			newDiv.top = 554;
 			break;
 
-		case (i > 20 && i < 30)? i : 'alert':	// left line
-			newDiv.width = 50;
+		case (i > 20 && i < 30)? i : 'alert':	// bottom line
+			newDiv.width = 52;
 			newDiv.height = 100;
-			newDiv.left = 498 - (i - 21) * newDiv.width;
+			newDiv.left = 499 - (i - 21) * (newDiv.width - 1);
 			newDiv.top = 554;
 			break;
 
@@ -139,8 +139,10 @@ for(let i = 0; i < 41; i++){
 			
 		case (i > 30 && i < 40)? i : 'alert':	// left line
 			newDiv.width = 100;
-			newDiv.height = 50;
-			newDiv.top = 502 - (i - 31) * newDiv.height;
+			newDiv.height = 52;
+
+			//Why is the left column bigger than the right one ??
+			newDiv.top = 503 - (i - 31) * (newDiv.height - 1.5);
 			break;
 
 	}

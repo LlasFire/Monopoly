@@ -18,9 +18,9 @@ function writeGamers() {
     returnString+= '<hr>';
 
     let div = document.createElement("div");
-        div.style.minHeight = 100 + 'px';
+        div.style.minHeight = 60 + 'px';
         div.style.backgroundColor = "#fefefe";
-        div.style.width = 298 + 'px';
+        div.style.width = 296 + 'px';
         div.innerHTML = returnString.slice(1);
         div.id = "result";
 
