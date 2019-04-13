@@ -1,30 +1,33 @@
 let button = document.getElementById('button');
 
 function writeGamers() {
-    let returnst = "0";
+    
+    let returnString = "0";
     
     for (var i=0,key; i < localStorage.length; i++) {
+        
         key = localStorage.key(i);
 
         let returnObj = JSON.parse(localStorage.getItem(key));
 
-        returnst+= '<hr>'
-        +returnObj.name + ': $'
-        +returnObj.capital +' | '
-        +returnObj.place + ' ';
+        returnString += '<hr>' + 
+         returnObj.name + ': $' + 
+         returnObj.capital +' | ' + 
+         returnObj.place + ' ';     
     }
+    returnString+= '<hr>';
 
-
-    
     let div = document.createElement("div");
-        div.style.height = 100 + 'px';
+        div.style.minHeight = 100 + 'px';
         div.style.backgroundColor = "#fefefe";
-        div.style.width = 200 + 'px';
-        div.innerHTML = returnst;
+        div.style.width = 298 + 'px';
+        div.innerHTML = returnString.slice(1);
+        div.id = "result";
 
     let writeGamers = document.getElementById('usertable');
-    writeGamers.appendChild(div);
+    writeGamers.appendChild(div); 
 }
+
 
 button.addEventListener('click', () =>{
     
@@ -44,10 +47,8 @@ button.addEventListener('click', () =>{
             
         let serialObj = JSON.stringify(myItem); //сериализуем его
         localStorage.setItem(name, serialObj); //запишем его в хранилище
-        //  document.location.href='index.html';
+        document.location.href='index.html';
     }
-
-    writeGamers();
-
 });
 
+writeGamers();
