@@ -88,8 +88,7 @@ btn.addEventListener('click', () => {
 
 
 
-    function loopScene(click){
-       
+    function loopScene(click){       
         cube.position.x += cubeMotion.positionX;
         cube.position.y += cubeMotion.positionY;
         cube.position.z += cubeMotion.positionZ;
