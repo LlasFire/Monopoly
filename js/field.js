@@ -1,5 +1,3 @@
-'use strict';
-
 function infoFromId(id) {
 
 	let inside, cost, pay, lineCost, linePay;

@@ -91,30 +91,4 @@ closeButton.addEventListener('click', (event) => {
         let target = event.target;
         target.disabled = "disabled";
     }
-    
-<<<<<<< HEAD
-=======
-    cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    cube.castShadow = true;
-    scene.add(cube);
-
-
-
-
-    function loopScene(click){       
-        cube.position.x += cubeMotion.positionX;
-        cube.position.y += cubeMotion.positionY;
-        cube.position.z += cubeMotion.positionZ;
-        cube.rotation.x += cubeMotion.rotationX;
-        cube.rotation.y += cubeMotion.rotationY;
-        cube.rotation.z += cubeMotion.rotationZ;
-         
-        
-        if(click <= 1){
-            requestAnimationFrame(function() { loopScene(click); });
-            renderer.render(scene, camera); 
-        } 
-    }
-    loopScene(dontClick);
->>>>>>> bc573f91f48b55b66de0856920241e41d2a42766
 });
