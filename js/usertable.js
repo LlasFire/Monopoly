@@ -2,53 +2,44 @@ let button = document.getElementById('button');
 
 function writeGamers() {
     
-    let returnString = "0";
-    
-    for (var i=0,key; i < localStorage.length; i++) {
-        
-        key = localStorage.key(i);
+    let returnString = "";
 
+    for (let key of Object.keys(localStorage)) {
         let returnObj = JSON.parse(localStorage.getItem(key));
-
-        returnString += '<hr>' + 
-         returnObj.name + ': $' + 
-         returnObj.capital +' | ' + 
-         returnObj.place + ' ';     
+        returnString += `<div class="user-cell">${ returnObj.name }: $${ returnObj.capital } | ${returnObj.place}<div>`;
     }
-    returnString+= '<hr>';
 
     let div = document.createElement("div");
-        div.style.minHeight = 60 + 'px';
-        div.style.backgroundColor = "#fefefe";
-        div.style.width = 296 + 'px';
-        div.innerHTML = returnString.slice(1);
-        div.id = "result";
+
+    div.style.minHeight = '60px';
+    div.style.backgroundColor = "#fefefe";
+    div.style.width = '296px';
+    div.innerHTML = returnString;
+
+    div.id = "result";
 
     let writeGamers = document.getElementById('usertable');
     writeGamers.appendChild(div); 
 }
 
 
-button.addEventListener('click', () =>{
-    
+button.addEventListener('click', () => {    
     let capital = document.getElementById('capital').value;
     let name = document.getElementById('name').value;
     
-	if ( name === "" || capital === "") {
+	if (name === "" || capital === "") {
+        alert("You have a mistake.");   
+        return;
+    } 
 
-        alert("You have a mistake.");
+    let myItem = {
+        name,
+        capital,
+        place : 0
+    };
         
-	}else{
-        
-        let myItem = {};
-            myItem.name = name;
-            myItem.capital = capital;
-            myItem.place = 0;
-            
-        let serialObj = JSON.stringify(myItem); //сериализуем его
-        localStorage.setItem(name, serialObj); //запишем его в хранилище
-        document.location.href='index.html';
-    }
+    localStorage.setItem(name, JSON.stringify(myItem));
+    document.location.href='/';
 });
 
 writeGamers();
