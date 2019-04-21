@@ -2,3 +2,78 @@
     margin-top: 10px;
     color: white;
 }
+
+#closed {
+    position: absolute;
+    top: 75%;
+    left: 45%;
+}
+
+#cube {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 170px;
+    position: relative;
+    height: 65px;
+    width: 65px;
+    transform-style: preserve-3d; 
+    animation: spincube 2s infinite linear;
+  }
+  
+  @keyframes spincube {
+    from,to {transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+    16% {transform: rotateY(90deg);}
+    33% {transform: rotateY(90deg) rotateZ(-90deg);}
+    50% {transform: rotateY(180deg) rotateZ(-90deg);}
+    66% {transform: rotateY(270deg) rotateX(-90deg);}
+    83% {transform: rotateX(-90deg);}
+    }
+
+#cube > div {
+    
+    position: absolute;
+    box-sizing: border-box;
+    padding: 0;
+    height: 182%;
+    width: 182%;
+    opacity: 1;
+    border: solid 1px #c5ababc7;
+    color: #ffffff;
+    border-radius: 7px;
+    background-image: url(../image/dice-28.jpg);
+    
+  }
+
+  #front {
+    transform: translateZ(117px);
+    background-position: -190px -9px;
+  }
+  
+  #back {
+    transform: translateZ(0px) rotateY(180deg); 
+    background-position: -715px -9px;
+  }
+  
+  #right {
+    transform: rotateY(-270deg) translateX(0px); 
+    transform-origin: top right;
+    background-position: -12px -9px;
+  }
+  
+  #left {
+    transform: rotateY(270deg) translateX(0px);
+    transform-origin: center left;
+    background-position: -894px -9px;
+  }
+  
+  #top {
+    transform: rotateX(-270deg) translateY(0px);
+    transform-origin: top center;
+    background-position: -363px -9px;
+  }
+  
+  #bottom {
+    transform: rotateX(270deg) translateY(0px);
+    transform-origin: bottom center;
+    background-position: -542px -9px;
+  }

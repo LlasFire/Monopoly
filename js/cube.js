@@ -1,107 +1,95 @@
 let modal = document.getElementById('modal');
 let btn = document.getElementById('goRoll');
 let closeSpan = document.getElementById('close');
+let closeButton = document.getElementById('closed');
+let cube = document.getElementById('cube');
+let diceSwitch = true;
+
+function closeModalWindow() {
+    modal.style.display = "none";
+}
+
+function CubeView(value) {
+    let front = document.getElementById('front').style;
+    let bottom = document.getElementById('bottom').style;
+    let right = document.getElementById('right').style;
+    let imagePosition = {
+        first: "-12px",
+        second: "-190px",
+        third: "-363px",
+        fourth: "-542px",
+        fifth: "-715px",
+        sixth: "-894px"
+    };
+    
+    switch(value)
+	{
+		case 1:
+            front.backgroundPositionX = imagePosition.first;
+            bottom.backgroundPositionX = imagePosition.fifth;
+            right.backgroundPositionX = imagePosition.third;
+		    break;
+		case 2:
+            front.backgroundPositionX = imagePosition.second;
+            bottom.backgroundPositionX = imagePosition.sixth;
+            right.backgroundPositionX = imagePosition.fourth;
+		    break;
+		case 3:
+            front.backgroundPositionX = imagePosition.third;
+            bottom.backgroundPositionX = imagePosition.second;
+            right.backgroundPositionX = imagePosition.first;
+		    break;
+		case 4:
+            front.backgroundPositionX = imagePosition.fourth;
+            bottom.backgroundPositionX = imagePosition.first;
+            right.backgroundPositionX = imagePosition.second;
+            break;
+		case 5:
+            front.backgroundPositionX = imagePosition.fifth;
+            bottom.backgroundPositionX = imagePosition.first;
+            right.backgroundPositionX = imagePosition.fourth;
+            break;
+		case 6:
+            front.backgroundPositionX = imagePosition.sixth;
+            bottom.backgroundPositionX = imagePosition.fourth;
+            right.backgroundPositionX = imagePosition.second;
+            break;
+	}
+}
 
 btn.addEventListener('click', () => {
     modal.style.display = "block";
+    cube.style.animation = "spincube 2s infinite linear";
+    diceSwitch = true;
+    closeButton.removeAttribute('disabled');
 });
 
-closeSpan.addEventListener('click', () => {
-    modal.style.display = "none";
-});
+closeSpan.addEventListener('click', closeModalWindow());
 
 window.addEventListener('click', (event) => {
     if(event.target == modal) {
-       modal.style.display = "none"; 
+        closeModalWindow(); 
     }   
 });
 
-/* 
-Дальнейшие переменные и код относятся к библиотеке THREE JS и 
-предназначены для работы с 3D графикой
-*/
+closeButton.addEventListener('click', (event) => {
+    
+    if(diceSwitch) {
 
-let myWindow = document.getElementById('modalContent');
-let canvas = document.getElementById('canvas');
-let renderer;
-let scene;
-let camera;
-let light;
-let cubeGeometry;
-let cubeMaterial;
-let cube;
-let cubeMotion = {
-    positionX : 0,
-    positionY : 0,
-    positionZ : 0,
-    rotationX : 0,
-    rotationY : 0,
-    rotationZ : 0
-};
+        cube.style.animation = "none";
 
+        let rand = Math.floor(Math.random()*6)+1;
 
-let gui = new dat.GUI({ autoPlace: false });
+        setTimeout(closeModalWindow, 2000);
 
-let customContainer = document.getElementById('gui_container');
-customContainer.appendChild(gui.domElement);
+        document.getElementById('cubNumber').innerHTML = rand + " ходов";
 
-    gui.add(cubeMotion, 'positionX').min(-8).max(8).step(0.1);
-    gui.add(cubeMotion, 'positionY').min(-8).max(8).step(0.1);
-    gui.add(cubeMotion, 'positionZ').min(-8).max(8).step(0.1);
-    gui.add(cubeMotion, 'rotationX').min(-0.5).max(0.5).step(0.0001);
-    gui.add(cubeMotion, 'rotationY').min(-0.5).max(0.5).step(0.0001);
-    gui.add(cubeMotion, 'rotationZ').min(-0.5).max(0.5).step(0.0001);
+        CubeView(rand);
 
-let dontClick = 0;
-
-btn.addEventListener('click', () => {
-    dontClick++;
-    let height = myWindow.offsetHeight;
-    let width = myWindow.offsetWidth;
-
-    canvas.setAttribute('width', width);
-    canvas.setAttribute('height', height);
-
-    renderer = new THREE.WebGLRenderer( {canvas: canvas} );
-    renderer.setClearColor(0x000000);
-
-    scene = new THREE.Scene();
-
-    camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 5000);
-    camera.position.set(0, 0, 1000);
-
-    light = new THREE.AmbientLight(0xffffff);
-    scene.add(light);
-
-    cubeGeometry = new THREE.CubeGeometry(300, 300, 300, 12, 12, 12);
-    cubeMaterial = new THREE.MeshBasicMaterial({color: 0xffffff, vertexColors: THREE.FaceColors });
-
-    for (let i = 0; i < cubeGeometry.faces.length; i++) {
-        cubeGeometry.faces[i].color.setRGB(Math.random(), Math.random(), Math.random());
-        
+        diceSwitch = false;
+    }else {
+        let target = event.target;
+        target.disabled = "disabled";
     }
     
-    cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
-    cube.castShadow = true;
-    scene.add(cube);
-
-
-
-
-    function loopScene(click){
-       
-        cube.position.x += cubeMotion.positionX;
-        cube.position.y += cubeMotion.positionY;
-        cube.position.z += cubeMotion.positionZ;
-        cube.rotation.x += cubeMotion.rotationX;
-        cube.rotation.y += cubeMotion.rotationY;
-        cube.rotation.z += cubeMotion.rotationZ;
-         
-        
-        if(click <= 1){
-            requestAnimationFrame(function() { loopScene(click); });
-            renderer.render(scene, camera); 
-        } 
-    }
-    loopScene(dontClick);
 });

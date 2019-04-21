@@ -57,11 +57,14 @@ hr {
 }
 
 #modalContent {
-    background-color: #fcf8e3;
+    background-color: #28e050;
     margin: 7% auto;
     border: 1px solid sandybrown;
-	width: 80%;
-	height: 80%;
+	width: 60%;
+	height: 60%;
+	border-radius: 15px;
+	perspective: 1000px;
+  	perspective-origin: 100% 100%;
 }
 
 #close{
@@ -70,14 +73,5 @@ hr {
     font-size: 24pt;
     font-weight: bold;
     cursor: pointer;
-}
-
-#gui_container{
-	min-width: 5px;
-	min-height: 5px;
-	top: 5px;
-    left: 500px;
-	background-color: white;
-	position: absolute;
 }
 /* ---------------- End of modal block ---------------------*/

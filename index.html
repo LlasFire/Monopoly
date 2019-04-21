@@ -23,21 +23,34 @@
 		</div>
 
 		<div id="cube_wrapper">
+		<br>
+
+		<span id="playerNumber"></span>
+		
+		<input type="button" class="btn btn-primary btn-lg" id="goRoll" value="Roll the dice !">
+		<hr>
+		<span id="cubNumber"></span>
+		<button id="move" class="btn btn-primary">Походить</button>
 			<div id="modal">
 				<span id="close">&times;</span>
-				<div id="gui_container"></div>
-				<div id="modalContent">					
-					<canvas id="canvas"></canvas>
+				<div id="modalContent">
+					<div id="cube">
+						<div id="front"></div>
+						<div id="back"></div>
+						<div id="top"></div>
+						<div id="bottom"></div>
+						<div id="left"></div>
+						<div id="right"></div>
+					</div>
+					<button id="closed" class="btn btn-info btn-lg">Try your luck!</button>	
 				</div>
 			</div>
-			<input type="button" class="btn btn-primary btn-lg" id="goRoll" value="Roll the dice !">
+			
 		</div>
 	</div>
 
 <script src="js/lib/jquery-3.3.1.js"></script>
 <script src="js/lib/bootstrap.js"></script>
-<script src="js/lib/three.min.js"></script>
-<script src="js/lib/dat.gui.min.js"></script>
 <script src="js/field.js"></script>	
 <script src="js/usertable.js"></script>
 <script src="js/cube.js"></script>
